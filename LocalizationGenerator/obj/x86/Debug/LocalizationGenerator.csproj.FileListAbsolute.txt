@@ -1,0 +1,11 @@
+C:\Users\urza\Dropbox\2012_PROJECTS\LocalizationGenerator\LocalizationGenerator\bin\Debug\LocalizationGenerator.exe
+C:\Users\urza\Dropbox\2012_PROJECTS\LocalizationGenerator\LocalizationGenerator\bin\Debug\LocalizationGenerator.pdb
+C:\Users\urza\Dropbox\2012_PROJECTS\LocalizationGenerator\LocalizationGenerator\obj\x86\Debug\MainWindow.baml
+C:\Users\urza\Dropbox\2012_PROJECTS\LocalizationGenerator\LocalizationGenerator\obj\x86\Debug\MainWindow.g.cs
+C:\Users\urza\Dropbox\2012_PROJECTS\LocalizationGenerator\LocalizationGenerator\obj\x86\Debug\App.g.cs
+C:\Users\urza\Dropbox\2012_PROJECTS\LocalizationGenerator\LocalizationGenerator\obj\x86\Debug\LocalizationGenerator_MarkupCompile.cache
+C:\Users\urza\Dropbox\2012_PROJECTS\LocalizationGenerator\LocalizationGenerator\obj\x86\Debug\LocalizationGenerator.g.resources
+C:\Users\urza\Dropbox\2012_PROJECTS\LocalizationGenerator\LocalizationGenerator\obj\x86\Debug\LocalizationGenerator.Properties.Resources.resources
+C:\Users\urza\Dropbox\2012_PROJECTS\LocalizationGenerator\LocalizationGenerator\obj\x86\Debug\LocalizationGenerator.exe
+C:\Users\urza\Dropbox\2012_PROJECTS\LocalizationGenerator\LocalizationGenerator\obj\x86\Debug\LocalizationGenerator.pdb
+C:\Users\urza\Dropbox\2012_PROJECTS\LocalizationGenerator\LocalizationGenerator\obj\x86\Debug\LocalizationGenerator.csproj.GenerateResource.Cache
