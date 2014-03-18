@@ -44,6 +44,15 @@ namespace LocalizationGenerator
                 if (string.IsNullOrWhiteSpace(line))
                     continue;
 
+                ///if the line starts with @ it is reference to existing key (e.g. common terms)
+                bool isReference = line.StartsWith("@");
+
+                //just remember whether it is reference or not, and delete the @ co the algorithm can process it the same way
+                if (isReference)
+                {
+                    line = line.Substring(1, line.Length - 1);
+                }
+
                 ///init new class
                 if (line.StartsWith("##"))
                 {
@@ -55,7 +64,7 @@ namespace LocalizationGenerator
                         properties.ForEach(p =>
                         {
 
-                            constructor += "\t" + p.Key + " = BIAS.Localization.LocManager.Instance.GetString(\"" + p.Key + "\");" + Environment.NewLine;
+                            constructor += "\t" + p.Key + " = Localization.LocManager.Instance.GetString(\"" + p.Key + "\");" + Environment.NewLine;
                         });
                         constructor += "} " + Environment.NewLine;
                         result += constructor;
@@ -157,9 +166,36 @@ namespace LocalizationGenerator
                     if (words.Count() >=3)
                         elementProperty = words[2];
 
+                    ///if elementProperty is not specified but key starts with run, btn, txt, lbl then generate it
+                    //TODO: it might also take _run in the middle e.g. TermsContions_runHeadline
+                    string[] prefixes = { "run", "txt", "lbl", "btn" };
+                    if (string.IsNullOrWhiteSpace(elementProperty) && prefixes.Any(p => key.StartsWith(p)) )
+                    {
+                        string[] text_prefixes = { "run", "txt" };
+                        string[] content_prefixes = { "lbl", "btn" };
+
+                        if (text_prefixes.Any(p => key.StartsWith(p)))
+                        {
+                            elementProperty = key + ".Text";
+                        }
+                        else if (content_prefixes.Any(p => key.StartsWith(p)))
+                        {
+                            elementProperty = key + ".Content";
+                        }
+                    }
+
                     if (!string.IsNullOrWhiteSpace(elementProperty))
                     {
-                        fillMethod += elementProperty + " = Localized." + "key" + ";" + Environment.NewLine;
+                        ///option 1: bind wpf elements to properties of generated class so it looks like: txtHeadline.Text = Localized.Headline
+                        ///it has advantages: 
+                        ///1. better intellisense support
+                        ///2. binding to properties means it will be easier to refafactor to impmente INotify so that language can be changed in runtim
+                        ///3. loads less values into memory (in theory)
+                        //fillMethod += elementProperty + " = Localized." + key + ";" + Environment.NewLine;
+
+                        ///option 2: binding to dictionary directly
+                        ///It does not requiere the generated bindig class to be inserted into project, you work directly with the LocManager
+                        fillMethod += elementProperty + " = " + "Localization.LocManager.Instance.GetString(\"" + key + "\");" + Environment.NewLine;
                     }
 
                     //last bit is comment for tranlators, so they know context of the word etc.
@@ -187,8 +223,7 @@ namespace LocalizationGenerator
                     constructor += "public Localized" + currentClass + "()" + Environment.NewLine + "{" + Environment.NewLine;
                     properties.ForEach(p =>
                     {
-
-                        constructor += "\t" + p.Key + " = BIAS.Localization.LocManager.Instance.GetString(\"" + p.Key + "\");" + Environment.NewLine;
+                        constructor += "\t" + p.Key + " = Localization.LocManager.Instance.GetString(\"" + p.Key + "\");" + Environment.NewLine;
                     });
                     constructor += "} " + Environment.NewLine;
                     result += constructor;
@@ -256,6 +291,8 @@ namespace LocalizationGenerator
                 if (line.StartsWith(";"))
                     continue;
 
+                
+
                 ///also skip empty lines
                 if (string.IsNullOrWhiteSpace(line))
                     continue;
@@ -297,6 +334,7 @@ namespace LocalizationGenerator
                 ///items in section
                 else
                 {
+                   
                     var words = line.Split(new[] { "#" }, StringSplitOptions.None);
 
                     //key is mandatory
@@ -337,8 +375,11 @@ namespace LocalizationGenerator
                     //last bit is comment for tranlators, so they know context of the word etc.
                     if (words.Count() >= 4)
                         trComment = words[3];
-                  
-                    result += "\t<item key=\"" + key + "\"" + " TranslationContext=\"" + trComment + "\"" +  ">" + englishText + "</item>"  + Environment.NewLine;
+
+                    ///skip lines that start with "@" because these are references to existing keys so it makes no sense to translate them
+                    ///e.g. common terms like "back", "continue" etc will be defined in common section and than only referenced
+                    if (!line.StartsWith("@"))
+                        result += "\t<item key=\"" + key + "\"" + " TranslationContext=\"" + trComment + "\"" +  ">" + englishText + "</item>"  + Environment.NewLine;
 
                 }
 
