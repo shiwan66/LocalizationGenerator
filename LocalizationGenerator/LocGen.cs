@@ -379,7 +379,7 @@ namespace LocalizationGenerator
                     ///skip lines that start with "@" because these are references to existing keys so it makes no sense to translate them
                     ///e.g. common terms like "back", "continue" etc will be defined in common section and than only referenced
                     if (!line.StartsWith("@"))
-                        result += "\t<item key=\"" + key + "\"" + " TranslationContext=\"" + trComment + "\"" +  ">" + englishText + "</item>"  + Environment.NewLine;
+                        result += "\t<item key=\"" + key + "\"" + (!string.IsNullOrWhiteSpace(trComment) ? " TranslationContext=\"" + trComment : "") + "\"" +  ">" + englishText + "</item>"  + Environment.NewLine;
 
                 }
 
