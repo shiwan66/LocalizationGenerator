@@ -14,18 +14,22 @@
             <RowDefinition Height="50" />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
+
         
+
         <TextBox Name="txtFastSharp" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AcceptsReturn="True" />
         <TextBox Name="txtXML" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AcceptsReturn="True" />
         <TextBox Name="txtClass" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" />
-        
+
         <TextBlock Text="Fast# source" Grid.Column="0" Grid.Row="0" />
         <TextBlock Text="XML" Grid.Column="1" Grid.Row="0" />
         <TextBlock Text="class" Grid.Column="2" Grid.Row="0" />
-        
+
         <Button Content="Generate class from Fast#" Grid.Column="2" Grid.Row="2" Click="Button_Click"/>
         <Button Name="btnXMLfromFast" Grid.Column="1" Grid.Row="2" Content="Generate XML from Fast#" Click="btnXMLfromFast_Click"/>
-        
+
         <TextBox Name="txtOutput" Grid.Row="3" Grid.ColumnSpan="3" AcceptsReturn="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+
+        <Button Name="bntOpenExtractorWindow" Content="ew" Margin="278,15,79,5" Click="bntOpenExtractorWindow_Click" />
     </Grid>
 </Window>

@@ -42,6 +42,12 @@ namespace LocalizationGenerator
             txtXML.Text = LocGen.GenerateXMLFromFastSharp(s, txtOutput);
         }
 
+        private void bntOpenExtractorWindow_Click(object sender, RoutedEventArgs e)
+        {
+            Window we = new ExtractXAMLelements();
+            we.Show();
+        }
+
         
     }
 }
