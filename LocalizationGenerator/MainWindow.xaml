@@ -30,6 +30,11 @@
 
         <TextBox Name="txtOutput" Grid.Row="3" Grid.ColumnSpan="3" AcceptsReturn="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
 
-        <Button Name="bntOpenExtractorWindow" Content="ew" Margin="278,15,79,5" Click="bntOpenExtractorWindow_Click" />
+        <Button Name="bntExtractFromXAML" Content="Extract from XAML.." Margin="266,15,10,5" Click="bntExtractFromXAML_Click" ToolTip="Extracs: TextBlock, Run, Label, Button elements from selected XAML files. They must have Name or x:Name filled" />
+
+        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Vertical">
+            <Label Name="helpLabel" Grid.Column="0" Grid.Row="2" ToolTipService.InitialShowDelay="0" ToolTipService.ShowDuration="3600000">How does it work (tooltip this)</Label>
+            <TextBlock>key # english text # element.property # comment for translation</TextBlock>
+        </StackPanel>
     </Grid>
 </Window>
